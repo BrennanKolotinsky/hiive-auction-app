@@ -1,24 +1,6 @@
 # README
+Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-v7-project-with-a-react-frontend-on-ubuntu-20-04#step-6-creating-the-recipe-controller-and-model
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tech Stack: Ruby on Rails, React, PostgreSQL, TypeScript, Jest and Rspec (mirroring VTS tech stack at past company)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+run bin/dev to start server, then visit http://localhost:3000/
