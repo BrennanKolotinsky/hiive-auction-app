@@ -5,3 +5,5 @@ Tech Stack: Ruby on Rails, React, PostgreSQL, TypeScript, Jest and Rspec (mirror
 
 run ```bin/dev``` to start server, then visit http://localhost:3000/
 run ```npm run check-types``` to check for TypeScript errors
+run ```bundle exec rspec spec/.../..._spec.rb``` for backend unit testing
+

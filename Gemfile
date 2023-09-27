@@ -54,6 +54,17 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  # add rspec + gems that support testing (example factories), following this guide: https://medium.com/@amliving/my-rails-rspec-set-up-6451269847f9
+  gem 'byebug', platform: :mri
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+
+  # adds binding.pry support for testing
+  gem 'pry-rails'
+  gem 'pry-doc'
 end
 
 group :development do
