@@ -4,6 +4,8 @@ Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-set-u
 Tech Stack: Ruby on Rails, React, PostgreSQL, TypeScript, Jest and Rspec (mirroring VTS tech stack at past company)
 
 run ```bin/dev``` to start server, then visit http://localhost:3000/
+
 run ```npm run check-types``` to check for TypeScript errors
+
 run ```bundle exec rspec spec/.../..._spec.rb``` for backend unit testing
 
