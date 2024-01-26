@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'item/index'
+    end
+  end
   devise_for :users
   root 'homepage#index'
   get '/*path' => 'homepage#index'
