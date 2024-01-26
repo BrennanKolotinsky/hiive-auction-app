@@ -16,4 +16,14 @@ RSpec.describe Api::V1::ItemController, type: :controller do
       expect(JSON.parse(response.body)).to eq([item.as_json])
     end
   end
+
+  describe "POST #create" do
+    let!(:user) { create(:user) }
+    before { allow(controller).to receive(:current_user) { user } }
+
+    it "returns http success" do
+      params = {name: 'iPad', description: 'Scratched'}
+      expect { post :create, params: params }.to change{ Item.count }.by(1)
+    end
+  end
 end
