@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get 'item/index'
       post 'item/create'
+      get 'item/show/:id', to: 'item#show'
     end
   end
   devise_for :users
