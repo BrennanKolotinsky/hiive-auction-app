@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import { Item } from '../types/item';
 import { getItems } from '../services';
+import { Link } from 'react-router-dom';
 
 export default () => {
 
@@ -38,6 +39,15 @@ export default () => {
                     })
                 }
             </table>
+            <div className="d-flex justify-content-center mt-4">
+                <Link
+                    to="/createItem"
+                    className="btn btn-lg custom-button"
+                    role="button"
+                    >
+                    Create Item
+                </Link>
+            </div>
         </div>
     );
 };

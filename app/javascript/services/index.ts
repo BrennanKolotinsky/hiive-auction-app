@@ -33,3 +33,32 @@ export const getItems = async (): Promise<Item[]> => {
         return [];
     };
 };
+
+export const createItem = async (name: string, description: string): Promise<Boolean> => {
+    const url = `/api/v1/item/create`;
+    const body = {
+        name,
+        description,
+    };
+
+    try {
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "X-CSRF-Token": token as string,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        if (response.ok) {
+            return true;
+        } else {
+            throw response;
+        }
+    } catch(e) {
+        console.warn(e);
+        return false;
+    };
+};
