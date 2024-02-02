@@ -30,4 +30,18 @@ RSpec.describe Item, type: :model do
       expect(Item.latest_item).to eq(item2)
     end
   end
+
+  describe '#is_active_auction?' do
+    let!(:user) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+
+    it 'returns that an auction is running when an item has just been put up for auction' do
+      expect(Item.is_active_auction?).to eq(true)
+    end
+
+    it 'returns that an auction is no longer running when the latest auction is old' do
+      item.update(created_at: Time.now - 31)
+      expect(Item.is_active_auction?).to eq(false)
+    end
+  end
 end
