@@ -32,7 +32,12 @@ export default (): JSX.Element => {
                 <label>Item Description:</label>
                 <textarea placeholder='Brand new, factory sealed' className='w-50 margin-left-small' onChange={(e) =>  setItemDescription(e.target.value)}></textarea>
             </div>
-            <button onClick={handleSubmit} className='btn btn-lg custom-button mt-4'>Create Item</button>
+            <div>
+                <button onClick={handleSubmit} className='btn btn-lg custom-button mt-4'>Create Item</button>
+            </div>
+            <div>
+                <button onClick={() => window.open(`/`)} className='btn btn-lg custom-button mt-2'>Navigate Home</button>
+            </div>
         </div>
     );
 };
