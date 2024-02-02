@@ -21,4 +21,13 @@ RSpec.describe Item, type: :model do
       expect(item.valid?).to eq(false)
     end
   end
+
+  describe '#self.latest_item' do
+    it 'displays the latest created item' do
+      user = create(:user)
+      item1 = create(:item, user: user)
+      item2 = create(:item, user: user)
+      expect(Item.latest_item).to eq(item2)
+    end
+  end
 end
