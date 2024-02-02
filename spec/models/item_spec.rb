@@ -25,7 +25,7 @@ RSpec.describe Item, type: :model do
   describe '#self.latest_item' do
     it 'displays the latest created item' do
       user = create(:user)
-      item1 = create(:item, user: user)
+      item1 = create(:item, user: user, created_at: Time.now - 31.seconds) # go back over 30 seconds to avoid validation preventing creation
       item2 = create(:item, user: user)
       expect(Item.latest_item).to eq(item2)
     end
@@ -42,6 +42,17 @@ RSpec.describe Item, type: :model do
     it 'returns that an auction is no longer running when the latest auction is old' do
       item.update(created_at: Time.now - 31)
       expect(Item.is_active_auction?).to eq(false)
+    end
+  end
+
+  describe '#create' do
+    let!(:user) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+
+    it 'throws an error when trying to create an auction, while another auction is still running' do
+      failed_item = Item.new(user: user, name: 'iPad Pro', description: 'Factory sealed')
+      expect(failed_item).to be_invalid
+      expect(failed_item.errors[:active_auction]).not_to be_empty
     end
   end
 end
