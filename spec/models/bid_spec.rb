@@ -50,6 +50,19 @@ RSpec.describe Bid, type: :model do
       expect(failed_bid).to be_invalid
       expect(failed_bid.errors[:auction_ended]).not_to be_empty
     end
+
+    it 'throws an error when trying to create a bid that is too little' do
+      Bid.create(user: bidder, amount: 155, item: product)
+      failed_bid = Bid.new(user: bidder, amount: 160, item: product)
+      expect(failed_bid).to be_invalid
+      expect(failed_bid.errors[:failed_minimum_bed]).not_to be_empty
+    end
+
+    it 'successfully creates a bid that is within the timeframe AND meets the minimum bid' do
+      Bid.create(user: bidder, amount: 155, item: product)
+      successful_second_bid = Bid.create(user: bidder, amount: 166, item: product)
+      expect(successful_second_bid.valid?).to be(true)
+    end
   end
 
   describe '#minimum_bid' do
