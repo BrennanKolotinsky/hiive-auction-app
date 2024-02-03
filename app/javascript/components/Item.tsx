@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItem } from '../services';
 import { Item } from '../types/item';
+import { Link } from 'react-router-dom';
 
 export default (): JSX.Element => {
 
@@ -25,6 +26,9 @@ export default (): JSX.Element => {
         <div>
             <h2 className='text-center'>Product: {item.name}</h2>
             <p className='text-center'>Description: {item.description}</p>
+            <div className='d-flex justify-content-center'>
+                <Link to='/' className='btn btn-lg custom-button mt-2'>Navigate Home</Link>
+            </div>
         </div>
     );
 };

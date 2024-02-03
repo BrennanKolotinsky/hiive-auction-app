@@ -33,7 +33,11 @@ export default () => {
                 {
                     items.map((item: Item) => {
                         return <tr>
-                            <td className='border'>{item.name}</td>
+                            <td className='border'>
+                                <Link to={`/item/${item.id}`}>
+                                    {item.name}
+                                </Link>
+                            </td>
                             <td className='border'>{item.description}</td>
                         </tr>
                     })

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createItem } from '../services';
+import { Link } from 'react-router-dom';
 
 export default (): JSX.Element => {
 
@@ -36,7 +37,7 @@ export default (): JSX.Element => {
                 <button onClick={handleSubmit} className='btn btn-lg custom-button mt-4'>Create Item</button>
             </div>
             <div>
-                <button onClick={() => window.open(`/`)} className='btn btn-lg custom-button mt-2'>Navigate Home</button>
+                <Link to='/' className='btn btn-lg custom-button mt-2'>Navigate Home</Link>
             </div>
         </div>
     );
