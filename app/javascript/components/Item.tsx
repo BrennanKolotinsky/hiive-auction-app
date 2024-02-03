@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getItem } from '../services';
 import { Item } from '../types/item';
 import { Link } from 'react-router-dom';
+import { createBid } from '../services';
 
 export default (): JSX.Element => {
 
@@ -10,6 +11,7 @@ export default (): JSX.Element => {
     const [item, setItem] = useState<Item | null>();
     const [auctionStillActive, setAuctionStillActive] = useState<boolean>(false);
     const [remainingAuctionTime, setRemainingAuctionTime] = useState<number>(0);
+    const [bidAmount, setBidAmount] = useState<number>(1);
 
     useEffect(() => {
         const fetchItem = async (): Promise<void> => {
@@ -39,6 +41,24 @@ export default (): JSX.Element => {
         return <></>;
     }
 
+    const handleSubmit = async (): Promise<void> => {
+        if (bidAmount === 0) {
+            alert('Please enter a valid bid');
+            return;
+        };
+
+        const success = await createBid(bidAmount, item.id);
+        if (success) {
+            alert('Successfully created bid');
+        } else {
+            alert('Failed to create bid!');
+        };
+
+        // let's update our bid info!
+        const updatedItem = await getItem(Number(id)) as Item;
+        setItem(updatedItem);
+    };
+
     return(
         <div>
             {
@@ -46,8 +66,22 @@ export default (): JSX.Element => {
             }
             <h2 className='text-center'>Product: {item.name}</h2>
             <p className='text-center'>Description: {item.description}</p>
-            <p className='text-center'>Current Bid: <strong>${item.latest_bid_amount}</strong></p>
-            <p className='text-center'>Current Winner: {item.latest_bid_user}</p>
+            <p className='text-center'>{auctionStillActive ? 'Current Bid' : 'Winning Bid'}: <strong>${item.latest_bid_amount}</strong></p>
+            <p className='text-center'>{auctionStillActive ? 'Current Winner' : 'Winner'}: {item.latest_bid_user}</p>
+            {
+                auctionStillActive && (
+                    <>
+                        <div className='d-flex justify-content-center'>
+                            <input value={bidAmount} type="number" onChange={(e) => setBidAmount(Number(e.target.value))}></input>
+                        </div>
+
+                        <div className='d-flex justify-content-center'>
+                            <button onClick={handleSubmit} className='btn btn-lg custom-button mt-4'>Create Bid</button>
+                        </div>
+                    </>
+                )
+            }
+
             <div className='d-flex justify-content-center'>
                 <Link to='/' className='btn btn-lg custom-button mt-2'>Navigate Home</Link>
             </div>

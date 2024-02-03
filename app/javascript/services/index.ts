@@ -62,3 +62,32 @@ export const createItem = async (name: string, description: string): Promise<Boo
         return false;
     };
 };
+
+export const createBid = async (amount: number, itemId: number): Promise<Boolean> => {
+    const url = `/api/v1/bid/create`;
+    const body = {
+        amount,
+        item_id: itemId,
+    };
+
+    try {
+        const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                "X-CSRF-Token": token as string,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        if (response.ok) {
+            return true;
+        } else {
+            throw response;
+        }
+    } catch(e) {
+        console.warn(e);
+        return false;
+    };
+};
