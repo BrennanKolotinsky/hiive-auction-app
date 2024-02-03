@@ -51,4 +51,31 @@ RSpec.describe Bid, type: :model do
       expect(failed_bid.errors[:auction_ended]).not_to be_empty
     end
   end
+
+  describe '#minimum_bid' do
+    it 'if the current bid is less than 10, the next bed must be current bid + 1' do
+      bid = create(:bid, item: product, user: bidder, amount: 5)
+      expect(bid.minimum_bid).to eq(bid.amount + 1)
+    end
+
+    it 'if the current bid is less than 100, the next bed must be current bid + 1' do
+      bid = create(:bid, item: product, user: bidder, amount: 55)
+      expect(bid.minimum_bid).to eq(bid.amount + 1)
+    end
+
+    it 'if the current bid is 100, the next bed must be 110' do
+      bid = create(:bid, item: product, user: bidder, amount: 100)
+      expect(bid.minimum_bid).to eq(110)
+    end
+
+    it 'if the current bid is less than 1000 but greater than 100, the next bed must be current bid + 10' do
+      bid = create(:bid, item: product, user: bidder, amount: 155)
+      expect(bid.minimum_bid).to eq(bid.amount + 10)
+    end
+
+    it 'if the current bid is less than 10000 but greater than 1000, the next bed must be current bid + 100' do
+      bid = create(:bid, item: product, user: bidder, amount: 1555)
+      expect(bid.minimum_bid).to eq(bid.amount + 100)
+    end
+  end
 end
