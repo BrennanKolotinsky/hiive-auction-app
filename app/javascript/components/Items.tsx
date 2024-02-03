@@ -17,7 +17,7 @@ export default () => {
         };
 
         fetchItem();
-    });
+    }, []);
 
     if (items.length === 0) {
         return <></>;
