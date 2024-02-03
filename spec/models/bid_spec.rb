@@ -42,4 +42,13 @@ RSpec.describe Bid, type: :model do
       expect(bid.valid?).to eq(false)
     end
   end
+
+  describe '#create' do
+    it 'throws an error when trying to create a bid after the auction has ended' do
+      product.update(created_at: Time.now - 31)
+      failed_bid = Bid.new(user: bidder, amount: 1, item: product)
+      expect(failed_bid).to be_invalid
+      expect(failed_bid.errors[:auction_ended]).not_to be_empty
+    end
+  end
 end
