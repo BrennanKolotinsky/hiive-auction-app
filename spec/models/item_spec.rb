@@ -68,4 +68,18 @@ RSpec.describe Item, type: :model do
       expect(item.latest_bid).to eq(bid_2)
     end
   end
+
+  describe '#auction_active?' do
+    let!(:user) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+
+    it 'returns true when auction is still running' do
+      expect(item.auction_active?).to eq(true)
+    end
+
+    it 'returns false when auction finishes running' do
+      item.update(created_at: Time.now - 31)
+      expect(item.auction_active?).to eq(false)
+    end
+  end
 end

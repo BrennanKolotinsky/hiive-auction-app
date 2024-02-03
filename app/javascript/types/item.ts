@@ -7,4 +7,5 @@ export type Item = {
     updated_at: string,
     latest_bid_amount: number,
     latest_bid_user: string,
+    auction_active: boolean,
 };

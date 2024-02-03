@@ -18,6 +18,10 @@ class Item < ApplicationRecord
     bids.order(amount: :desc).first
   end
 
+  def auction_active?
+    created_at + 30.seconds > Time.now
+  end
+
   private
 
   def no_active_auction?

@@ -35,7 +35,7 @@ export default () => {
                         return <tr>
                             <td className='border'>
                                 <Link to={`/item/${item.id}`}>
-                                    {item.name}
+                                    {item.name}{item.auction_active ? ' (ACTIVE AUCTION!!!)' : ''}
                                 </Link>
                             </td>
                             <td className='border'>{item.description}</td>
