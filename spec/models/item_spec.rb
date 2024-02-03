@@ -55,4 +55,17 @@ RSpec.describe Item, type: :model do
       expect(failed_item.errors[:active_auction]).not_to be_empty
     end
   end
+
+  describe '#latest_bid' do
+    let!(:user) { create(:user) }
+    let!(:bidder) { create(:user) }
+    let!(:bidder_2) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+    let!(:bid) { create(:bid, item: item, user: bidder, amount: 1) }
+    let!(:bid_2) { create(:bid, item: item, user: bidder_2, amount: 11) }
+
+    it 'displays the latest bid' do
+      expect(item.latest_bid).to eq(bid_2)
+    end
+  end
 end
