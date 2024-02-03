@@ -13,7 +13,8 @@ RSpec.describe Api::V1::ItemController, type: :controller do
 
     it "returns an array of items" do
       get :index
-      expect(JSON.parse(response.body)).to eq([item.as_json])
+      expected_response = item.as_json.merge({"latest_bid_amount" => 0, "latest_bid_user" => ''})
+      expect(JSON.parse(response.body)).to eq([expected_response])
     end
   end
 
@@ -33,7 +34,8 @@ RSpec.describe Api::V1::ItemController, type: :controller do
 
     it "returns http success" do
       get :show, params: { id: item.id }
-      expect(JSON.parse(response.body)).to eq(item.as_json)
+      expected_response = item.as_json.merge({"latest_bid_amount" => 0, "latest_bid_user" => ''})
+      expect(JSON.parse(response.body)).to eq(expected_response)
     end
   end
 end

@@ -5,4 +5,6 @@ export type Item = {
     user_id: number,
     created_at: string,
     updated_at: string,
+    latest_bid_amount: number,
+    latest_bid_user: string,
 };

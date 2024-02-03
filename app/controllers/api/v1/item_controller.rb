@@ -11,7 +11,7 @@ class Api::V1::ItemController < ApplicationController
   end
 
   def show
-    render json: @item
+    render json: @item, serializer: ItemSerializer
   end
 
   private
