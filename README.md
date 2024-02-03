@@ -1,4 +1,6 @@
 # README
+Video describing the project: https://www.loom.com/share/93b3e9345e9042b88013f80c92cd6de9
+
 Follow this guide: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-v7-project-with-a-react-frontend-on-ubuntu-20-04#step-6-creating-the-recipe-controller-and-model
 
 Tech Stack: Ruby on Rails, React, PostgreSQL, TypeScript, Jest and Rspec (mirroring VTS tech stack at past company)
