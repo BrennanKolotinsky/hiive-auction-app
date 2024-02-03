@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_many :bids
 
   validates :name, presence: true
   validate :no_active_auction?, on: :create
@@ -11,6 +12,14 @@ class Item < ApplicationRecord
   def self.is_active_auction?
     return false if self.count == 0
     self.latest_item.created_at + 30.seconds > Time.now
+  end
+
+  def latest_bid
+    bids.order(amount: :desc).first
+  end
+
+  def auction_active?
+    created_at + 30.seconds > Time.now
   end
 
   private

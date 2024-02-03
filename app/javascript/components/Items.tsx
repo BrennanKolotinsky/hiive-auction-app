@@ -17,7 +17,7 @@ export default () => {
         };
 
         fetchItem();
-    });
+    }, []);
 
     if (items.length === 0) {
         return <></>;
@@ -33,7 +33,11 @@ export default () => {
                 {
                     items.map((item: Item) => {
                         return <tr>
-                            <td className='border'>{item.name}</td>
+                            <td className='border'>
+                                <Link to={`/item/${item.id}`}>
+                                    {item.name}{item.auction_active ? ' (ACTIVE AUCTION!!!)' : ''}
+                                </Link>
+                            </td>
                             <td className='border'>{item.description}</td>
                         </tr>
                     })

@@ -55,4 +55,31 @@ RSpec.describe Item, type: :model do
       expect(failed_item.errors[:active_auction]).not_to be_empty
     end
   end
+
+  describe '#latest_bid' do
+    let!(:user) { create(:user) }
+    let!(:bidder) { create(:user) }
+    let!(:bidder_2) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+    let!(:bid) { create(:bid, item: item, user: bidder, amount: 1) }
+    let!(:bid_2) { create(:bid, item: item, user: bidder_2, amount: 11) }
+
+    it 'displays the latest bid' do
+      expect(item.latest_bid).to eq(bid_2)
+    end
+  end
+
+  describe '#auction_active?' do
+    let!(:user) { create(:user) }
+    let!(:item) { create(:item, user: user) }
+
+    it 'returns true when auction is still running' do
+      expect(item.auction_active?).to eq(true)
+    end
+
+    it 'returns false when auction finishes running' do
+      item.update(created_at: Time.now - 31)
+      expect(item.auction_active?).to eq(false)
+    end
+  end
 end
