@@ -26,6 +26,8 @@ export default (): JSX.Element => {
         <div>
             <h2 className='text-center'>Product: {item.name}</h2>
             <p className='text-center'>Description: {item.description}</p>
+            <p className='text-center'>Current Bid: <strong>${item.latest_bid_amount}</strong></p>
+            <p className='text-center'>Current Winner: {item.latest_bid_user}</p>
             <div className='d-flex justify-content-center'>
                 <Link to='/' className='btn btn-lg custom-button mt-2'>Navigate Home</Link>
             </div>
